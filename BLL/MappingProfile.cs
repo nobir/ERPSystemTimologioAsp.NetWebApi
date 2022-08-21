@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BLL.BOs;
+using DAL.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,17 @@ namespace BLL
             // Example: CreateMap<AddressModel, Address>();
             //          CreateMap<Address, AddressModel>();
 
+            CreateMap<User, UserDTO>();
+            CreateMap<UserDTO, User>();
 
+            CreateMap<Address, AddressDTO>();
+            CreateMap<AddressDTO, Address>();
+
+            CreateMap<Region, RegionDTO>();
+            CreateMap<RegionDTO, Region>();
+
+            CreateMap<Branch, BranchDTO>();
+            CreateMap<BranchDTO, Branch>();
         }
     }
 }

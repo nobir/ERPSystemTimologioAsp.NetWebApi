@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERPSystem.Controllers.ActionFilters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -11,6 +12,7 @@ namespace ERPSystem
         {
             // Web API configuration and services
             config.EnableCors();
+            config.Filters.Add(new ValidationModelAttribute());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
