@@ -29,5 +29,29 @@ namespace DAL
         {
             return new WorkingHourRepo(db);
         }
+
+        public static IRepo<Customer, int,bool> GetCustomerDataAccess()
+        {
+            return new CustomerRepo(DataAccessFactory.db);
+        }
+        public static IRepo<Invoice, int,bool> GetInvoiceDataAccess()
+        {
+            return new InvoiceRepo(DataAccessFactory.db);
+        }
+
+        public static IRepo<CategoryInvoice, int,bool> GetCategoryInvoiceDataAccess()
+        {
+            return new CategoryInvoiceRepo(DataAccessFactory.db);
+        }
+
+        public static IRepo<VacationDetail, int, bool> GetVacationDetailDataAccess()
+        {
+            return new VacationDetailRepo(DataAccessFactory.db);
+        }
+
+        public static IRepo<Payment, int, bool> GetPaymentDataAccess()
+        {
+            return new SalaryManageRepo(DataAccessFactory.db);
+        }
     }
 }

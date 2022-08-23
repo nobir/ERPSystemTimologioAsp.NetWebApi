@@ -34,6 +34,21 @@ namespace BLL
 
             CreateMap<WorkingHour, WorkingHourDTO>();
             CreateMap<WorkingHourDTO, WorkingHour>();
+
+            CreateMap<CustomerDTO, Customer>();
+            CreateMap<Customer, CustomerDTO>();
+
+            CreateMap<InvoiceDTO, Invoice>();
+            CreateMap<Invoice, InvoiceDTO>();
+
+            CreateMap<CategoryInvoiceDTO, CategoryInvoice>();
+            CreateMap<CategoryInvoice, CategoryInvoiceDTO>();
+
+            CreateMap<VacationDetailDTO, VacationDetail>();
+            CreateMap<VacationDetail, VacationDetailDTO>();
+
+            CreateMap<PaymentDTO, Payment>();
+            CreateMap<Payment, PaymentDTO>();
         }
     }
 }

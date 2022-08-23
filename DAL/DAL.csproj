@@ -119,6 +119,11 @@
     <Compile Include="Interfaces\IRepoUser.cs" />
     <Compile Include="Interfaces\IRepoWorkingHour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repo\CategoryInvoiceRepo.cs" />
+    <Compile Include="Repo\CustomerRepo.cs" />
+    <Compile Include="Repo\SalaryManageRepo.cs" />
+    <Compile Include="Repo\VacationDetailRepo.cs" />
+    <Compile Include="Repo\InvoiceRepo.cs" />
     <Compile Include="Repo\TokenRepo.cs" />
     <Compile Include="Repo\UserRepo.cs" />
     <Compile Include="Repo\WorkingHourRepo.cs" />
