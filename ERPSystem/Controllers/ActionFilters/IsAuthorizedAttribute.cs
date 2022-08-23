@@ -17,7 +17,7 @@ namespace ERPSystem.Controllers.ActionFilters
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var token = actionContext.Request.Headers.Authorization.ToString();
-            int user_id = ((dynamic)actionContext.ActionArguments.FirstOrDefault().Value).Id;
+            int user_id = ((dynamic)actionContext.ActionArguments.FirstOrDefault().Value).AuthId;
 
             if(token.Length < 0 || token == null)
             {
