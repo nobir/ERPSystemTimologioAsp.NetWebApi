@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repo
 {
-    internal class UserRepo : IRepo<User, int, bool>
+    internal class UserRepo : IRepoUser<User, int, bool>
     {
         private static TimologioContext db;
 
@@ -19,48 +19,63 @@ namespace DAL.Repo
 
         public bool Create(User obj)
         {
-            UserRepo.db.Users.Add(obj);
+            db.Users.Add(obj);
 
-            return UserRepo.db.SaveChanges() > 0;
+            return db.SaveChanges() > 0;
         }
 
         public bool Delete(int id)
         {
-            var user = UserRepo.db.Users.Find(id);
+            var user = db.Users.Find(id);
 
             if (user == null)
             {
                 return false;
             }
 
-            UserRepo.db.Users.Remove(user);
+            db.Addresses.Attach(user.Address);
+            if (user.Region != null) db.Regions.Attach(user.Region);
+            if (user.Branch != null) db.Branches.Attach(user.Branch);
 
-            return UserRepo.db.SaveChanges() > 0;
+            user.Permissions.Clear();
+
+            db.Users.Remove(user);
+
+            return db.SaveChanges() > 0;
         }
 
         public User Get(int id)
         {
-            return UserRepo.db.Users.Find(id);
+            return db.Users.Find(id);
+        }
+
+        public User GetByEmail(string email)
+        {
+            return db.Users.FirstOrDefault(u => u.Email == email);
+        }
+
+        public User GetById(int id)
+        {
+            return db.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public List<User> Gets()
         {
-            return UserRepo.db.Users.ToList();
+            return db.Users.ToList();
         }
 
         public bool Update(User obj)
         {
-            var user = UserRepo.db.Users.Where(u => u.Id == obj.Id).FirstOrDefault();
+            var user = db.Users.Where(u => u.Id == obj.Id).SingleOrDefault();
 
             if (user == null)
             {
                 return false;
             }
 
-            UserRepo.db.Entry(user).CurrentValues.SetValues(obj);
+            db.Entry(user).CurrentValues.SetValues(obj);
 
-            return UserRepo.db.SaveChanges() > 0;
+            return db.SaveChanges() > 0;
         }
-
     }
 }
