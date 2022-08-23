@@ -57,11 +57,15 @@
     <Compile Include="BOs\AddressDTO.cs" />
     <Compile Include="BOs\BranchDTO.cs" />
     <Compile Include="BOs\RegionDTO.cs" />
+    <Compile Include="BOs\TokenDTO.cs" />
     <Compile Include="BOs\UserDTO.cs" />
+    <Compile Include="BOs\WorkingHourDTO.cs" />
     <Compile Include="Mapping.cs" />
     <Compile Include="MappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\TokenService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\WorkingHourService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
