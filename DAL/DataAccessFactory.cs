@@ -15,9 +15,19 @@ namespace DAL
 
         private DataAccessFactory() { }
 
-        public static IRepo<User, int, bool> GetUserDataAccess()
+        public static IRepoToken<Token, string, bool> GetTokenDataAccess()
+        {
+            return new TokenRepo(db);
+        }
+
+        public static IRepoUser<User, int, bool> GetUserDataAccess()
         {
             return new UserRepo(db);
+        }
+
+        public static IRepoWorkingHour<WorkingHour, int, bool> GetWorkingHourDataAccess()
+        {
+            return new WorkingHourRepo(db);
         }
     }
 }
