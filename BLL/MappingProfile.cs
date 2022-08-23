@@ -28,6 +28,12 @@ namespace BLL
 
             CreateMap<Branch, BranchDTO>();
             CreateMap<BranchDTO, Branch>();
+
+            CreateMap<Token, TokenDTO>();
+            CreateMap<TokenDTO, Token>();
+
+            CreateMap<WorkingHour, WorkingHourDTO>();
+            CreateMap<WorkingHourDTO, WorkingHour>();
         }
     }
 }
