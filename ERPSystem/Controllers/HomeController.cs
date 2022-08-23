@@ -20,9 +20,9 @@ namespace ERPSystem.Controllers
         [ValidationModel]
         public HttpResponseMessage Login([FromBody] UserDTO user)
         {
-            var _user = UserService.GetByEmail(user.Email.ToString().Trim());
+            var _user = UserService.GetByEmail(user?.Email.ToString().Trim());
 
-            if (_user == null || !_user.Password.Equals(user.Password))
+            if (_user == null || !_user.Password.Equals(user?.Password))
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new
                 {
