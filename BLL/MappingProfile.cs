@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using BLL.BOs;
+using BLL.BOs.Admin;
+using BLL.BOs.Login;
 using DAL.EF;
 using System;
 using System.Collections.Generic;
@@ -20,8 +22,17 @@ namespace BLL
             CreateMap<User, UserDTO>();
             CreateMap<UserDTO, User>();
 
+            CreateMap<User, UserLoginDTO>();
+            CreateMap<UserLoginDTO, User>();
+
+            CreateMap<User, CreateUserDTO>();
+            CreateMap<CreateUserDTO, User>();
+
             CreateMap<Address, AddressDTO>();
             CreateMap<AddressDTO, Address>();
+
+            CreateMap<Permission, PermissionDTO>();
+            CreateMap<PermissionDTO, Permission>();
 
             CreateMap<Region, RegionDTO>();
             CreateMap<RegionDTO, Region>();

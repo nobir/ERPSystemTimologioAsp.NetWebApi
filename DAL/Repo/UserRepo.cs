@@ -19,6 +19,14 @@ namespace DAL.Repo
 
         public bool Create(User obj)
         {
+            var _ps = new List<Permission>();
+            foreach(var permission in obj.Permissions)
+            {
+                var _permission = db.Permissions.Find(permission.Id);
+                var _p = db.Permissions.Attach(_permission);
+                _ps.Add(_p);
+            }
+            obj.Permissions = _ps;
             db.Users.Add(obj);
 
             return db.SaveChanges() > 0;
@@ -33,7 +41,7 @@ namespace DAL.Repo
                 return false;
             }
 
-            db.Addresses.Attach(user.Address);
+            db.Addresses.Remove(user.Address);
             if (user.Region != null) db.Regions.Attach(user.Region);
             if (user.Branch != null) db.Branches.Attach(user.Branch);
 
@@ -51,12 +59,17 @@ namespace DAL.Repo
 
         public User GetByEmail(string email)
         {
-            return db.Users.FirstOrDefault(u => u.Email == email);
+            return db.Users.FirstOrDefault(u => u.Email.Equals(email));
         }
 
         public User GetById(int id)
         {
             return db.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public User GetByUsername(string username)
+        {
+            return db.Users.FirstOrDefault(u => u.Username.Equals(username));
         }
 
         public List<User> Gets()
@@ -72,6 +85,20 @@ namespace DAL.Repo
             {
                 return false;
             }
+
+            var _ps = new List<Permission>();
+            user.Permissions.Clear();
+            foreach (var permission in obj.Permissions)
+            {
+                var _permission = db.Permissions.Find(permission.Id);
+                var _p = db.Permissions.Attach(_permission);
+                _ps.Add(_p);
+            }
+            user.Permissions = _ps;
+
+            obj.Address = null;
+            obj.AddressId = user.AddressId;
+            obj.Permissions = _ps;
 
             db.Entry(user).CurrentValues.SetValues(obj);
 

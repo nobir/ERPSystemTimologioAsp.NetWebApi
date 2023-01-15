@@ -9,6 +9,7 @@ namespace DAL.Interfaces
     public interface IRepoUser<ClassType, PrimaryKey, MethodType> : IRepo<ClassType, PrimaryKey, MethodType>
     {
         ClassType GetByEmail(string email);
+        ClassType GetByUsername(string username);
         ClassType GetById(int id);
     }
 }

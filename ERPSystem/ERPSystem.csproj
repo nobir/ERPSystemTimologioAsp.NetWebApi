@@ -95,8 +95,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActionFilters\IsAdminAttribute.cs" />
     <Compile Include="Controllers\ActionFilters\IsAuthorizedAttribute.cs" />
     <Compile Include="Controllers\ActionFilters\ValidationModelAttribute.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BranchManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

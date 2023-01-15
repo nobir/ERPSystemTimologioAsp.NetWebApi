@@ -1,4 +1,5 @@
 ﻿using BLL.BOs;
+using BLL.BOs.Logout;
 using BLL.Services;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace ERPSystem.Controllers.ActionFilters
     {
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var token = actionContext.Request.Headers.Authorization.ToString();
-            int user_id = ((dynamic)actionContext.ActionArguments.FirstOrDefault().Value).AuthId;
+            var token = actionContext.Request.Headers.Authorization != null ? actionContext.Request.Headers.Authorization.ToString() : "";
+            int user_id = ((AuthIdDTO)actionContext.ActionArguments.FirstOrDefault().Value).AuthId;
 
             if(token.Length < 0 || token == null)
             {

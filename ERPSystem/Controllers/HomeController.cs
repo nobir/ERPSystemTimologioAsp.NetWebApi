@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using BLL.BOs;
+using BLL.BOs.Login;
+using BLL.BOs.Logout;
 using BLL.Services;
 using ERPSystem.Controllers.ActionFilters;
 
@@ -18,7 +20,7 @@ namespace ERPSystem.Controllers
         [Route("login")]
         [HttpPost]
         [ValidationModel]
-        public HttpResponseMessage Login([FromBody] UserDTO user)
+        public HttpResponseMessage Login([FromBody] UserLoginDTO user)
         {
             var _user = UserService.GetByEmail(user?.Email.ToString().Trim());
 
@@ -42,7 +44,11 @@ namespace ERPSystem.Controllers
                 UserId = _user.Id
             };
 
-            var isUpdate = UserService.Update(_user) || (TokenService.Create(_token) && WorkingHourService.Create(_working_hour));
+            bool isUserUpdated = UserService.Update(_user);
+            bool isTokenUpdated = TokenService.Create(_token);
+            bool isWorkingHourUpdated = WorkingHourService.Create(_working_hour);
+
+            var isUpdate = isUserUpdated || (isTokenUpdated && isWorkingHourUpdated);
 
             return isUpdate ? Request.CreateResponse(
                     HttpStatusCode.OK,
@@ -83,9 +89,9 @@ namespace ERPSystem.Controllers
         [HttpPost]
         [IsAuthorized]
         [ValidationModel]
-        public HttpResponseMessage Logout([FromBody] dynamic user)
+        public HttpResponseMessage Logout([FromBody] AuthIdDTO obj)
         {
-            var _user = UserService.Get((int)(user.AuthId));
+            var _user = UserService.Get(obj.AuthId);
 
             if (_user == null)
             {
@@ -119,7 +125,11 @@ namespace ERPSystem.Controllers
                 });
             }
 
-            bool isUpdate = UserService.Update(_user) || (TokenService.Update(token) && WorkingHourService.Update(working_hour));
+            bool isUserUpdated = UserService.Update(_user);
+            bool isTokenUpdated = TokenService.Update(token);
+            bool isWorkingHourUpdated = WorkingHourService.Update(working_hour);
+
+            bool isUpdate = isUserUpdated || (isTokenUpdated && isWorkingHourUpdated);
 
             return isUpdate ? Request.CreateResponse(
                     HttpStatusCode.OK,
